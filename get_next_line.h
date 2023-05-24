@@ -6,13 +6,21 @@
 /*   By: sal-haja <sal-haja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:33:59 by sal-haja          #+#    #+#             */
-/*   Updated: 2023/05/23 16:35:12 by sal-haja         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:03:09 by sal-haja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
+# include <unistd.h>
 
-char	*get_next_line(int fd)
+struct s_node {
+	int				data;
+	struct s_node	*next;
+};
+char	*get_next_line(int fd);
 
 #endif
