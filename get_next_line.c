@@ -6,7 +6,7 @@
 /*   By: sal-haja <sal-haja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:33:50 by sal-haja          #+#    #+#             */
-/*   Updated: 2023/05/25 10:41:07 by sal-haja         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:38:54 by sal-haja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ void	copy_to_lnl(struct s_node *str_lines, char buff[])
 	}
 }
 
+char	*make_char(struct s_node *str)
+{
+	char	*ans;
+	int		len;
+	int		i;
+
+	i = 0;
+	len = linked_len(str);
+	*ans = malloc(len);
+	if (!ans)
+		return (NULL);
+	while (i < len)
+	{
+		ans[i] = get_linked_element();
+		i++;
+	}
+	return (ans);
+}
 
 char	*get_next_line(int fd)
 {
@@ -36,13 +54,15 @@ char	*get_next_line(int fd)
 	struct s_node	*str_lines;
 	char			buff[BUFFER_SIZE];
 
+	if (fd < 0)
+		return (NULL);
 	while (1)
 	{
-		bytes_read = read(fd, buff);
+		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == 0)
 			break ;
 		if (bytes_read)
-			copy_to_lnl(buff, str_lines);
+			copy_to_lnl(str_lines, buff);
 	}
-	return (str_lines);
+	return (make_char(str_lines));
 }

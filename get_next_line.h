@@ -6,7 +6,7 @@
 /*   By: sal-haja <sal-haja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:33:59 by sal-haja          #+#    #+#             */
-/*   Updated: 2023/05/24 11:03:09 by sal-haja         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:38:46 by sal-haja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #  define BUFFER_SIZE 1024
 # endif
 # include <unistd.h>
+# include <stdlib.h>
 
 struct s_node {
 	int				data;
