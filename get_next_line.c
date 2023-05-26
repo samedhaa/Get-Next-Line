@@ -6,47 +6,11 @@
 /*   By: sal-haja <sal-haja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:33:50 by sal-haja          #+#    #+#             */
-/*   Updated: 2023/05/25 12:38:54 by sal-haja         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:07:52 by sal-haja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-void	copy_to_lnl(struct s_node *str_lines, char buff[])
-{
-	static struct s_node	*node;
-	struct s_node			*tmp;
-	int						i;
-
-	node = str_lines;
-	i = 0;
-	while (buff[i] != '\0')
-	{
-		tmp->next = NULL;
-		tmp->data = buff[i];
-		*node->next = *tmp;
-		node = node->next;
-	}
-}
-
-char	*make_char(struct s_node *str)
-{
-	char	*ans;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = linked_len(str);
-	*ans = malloc(len);
-	if (!ans)
-		return (NULL);
-	while (i < len)
-	{
-		ans[i] = get_linked_element();
-		i++;
-	}
-	return (ans);
-}
 
 char	*get_next_line(int fd)
 {
@@ -56,7 +20,11 @@ char	*get_next_line(int fd)
 
 	if (fd < 0)
 		return (NULL);
-	while (1)
+	str_lines = malloc(sizeof(struct s_node));
+	if (!str_lines)
+		return (NULL);
+	bytes_read = 1;
+	while (bytes_read)
 	{
 		bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (bytes_read == 0)
@@ -64,5 +32,7 @@ char	*get_next_line(int fd)
 		if (bytes_read)
 			copy_to_lnl(str_lines, buff);
 	}
-	return (make_char(str_lines));
+	if (str_lines)
+		return (make_char(str_lines));
+	return (NULL);
 }
